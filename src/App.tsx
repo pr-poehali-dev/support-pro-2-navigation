@@ -15,6 +15,7 @@ import ReportsPage from "@/pages/ReportsPage";
 import SocialPage from "@/pages/SocialPage";
 import StackPage from "@/pages/StackPage";
 import SettingsPage from "@/pages/SettingsPage";
+import ClientPortalPage from "@/pages/ClientPortalPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />} />
+      <Route path="/client" element={<ClientPortalPage />} />
       <Route
         element={
           <ProtectedRoute>

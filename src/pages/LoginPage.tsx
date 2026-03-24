@@ -6,12 +6,6 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import Icon from '@/components/ui/icon';
 
-const DEMO_USERS = [
-  { id: '1', name: 'Александр Иванов', email: 'admin@company.ru', role: 'admin' as const, status: 'online' as const, login: 'admin', password: 'admin123' },
-  { id: '2', name: 'Мария Петрова', email: 'okk@company.ru', role: 'okk' as const, status: 'online' as const, login: 'okk', password: 'okk123' },
-  { id: '3', name: 'Сергей Козлов', email: 'operator@company.ru', role: 'operator' as const, status: 'online' as const, login: 'operator', password: 'op123' },
-];
-
 export default function LoginPage() {
   const [loginVal, setLoginVal] = useState('');
   const [passwordVal, setPasswordVal] = useState('');
@@ -24,16 +18,11 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     setLoading(true);
-
-    await new Promise(r => setTimeout(r, 600));
-
-    const found = DEMO_USERS.find(u => u.login === loginVal && u.password === passwordVal);
-    if (found) {
-      const { login: _l, password: _p, ...user } = found;
-      login(user, 'demo-token-' + user.id);
+    const result = await login(loginVal.trim(), passwordVal);
+    if (result.ok) {
       navigate('/');
     } else {
-      setError('Неверный логин или пароль');
+      setError(result.error || 'Ошибка входа');
     }
     setLoading(false);
   };

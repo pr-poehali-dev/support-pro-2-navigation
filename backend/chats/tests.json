@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "name": "Get chats without auth",
+      "method": "GET",
+      "path": "/chats",
+      "expectedStatus": 401,
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Create client chat",
+      "method": "POST",
+      "path": "/client",
+      "body": {"clientName": "Тест Клиент", "subject": "Тестовое обращение", "firstMessage": "Привет, нужна помощь!"},
+      "expectedStatus": 200,
+      "expectedBody": {"clientToken": "string"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

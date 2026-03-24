@@ -46,8 +46,8 @@ export default function Sidebar() {
     !item.roles || (user && item.roles.includes(user.role))
   );
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate('/login');
   };
 
